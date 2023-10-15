@@ -439,6 +439,10 @@ for subdir, dirs, files in os.walk(source):
               recinfo = syminfo.get_recompiled_address_from_name(name)
               if not recinfo:
                 continue
+          elif srcfilename.endswith('.h'):
+            # We won't be able to find the address for inlined functions
+            # in the syminfo.
+            continue
           else:
               find_open_bracket = line
               while '{' not in find_open_bracket:
